@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "FFmpegMedia666"
 include(":app")
- 
+include(":ffmpeg")
