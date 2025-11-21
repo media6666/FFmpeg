@@ -31,36 +31,54 @@ dependencyResolutionManagement {
 implementation 'com.github.media6666:FFmpegMedia6666:v1'
 ```
 
+### Step 3 — Init
+```
+FFmpegMedia.getInstance().initLib { loaded ->
+            Log.e("LIB loaded", "$loaded")
+        }
+```
+
 ## Usage
 
 ### Video → MP3
 ```kotlin
-FFmpegMedia.run(
-    command = "-i ${videoPath} -vn -ar 44100 -ac 2 -b:a 192k ${outputPath}",
-    onSuccess = { Log.d("FFmpeg", "Converted successfully.") },
-    onFailure = { error -> Log.e("FFmpeg", "Error: $error") }
-)
+        val cmd = "-i ${videoPath} -vn -ar 44100 -ac 2 -b:a 192k ${outputPath}"
+        val commandArray = cmd.split(" ").toTypedArray()
+        FFmpegMedia.getInstance().run(
+            command = commandArray,
+            durationTotal = 10, //  duration audio,
+            progressCallBack = progressCallBack
+        )
 ```
 
 ### Audio Cutter
 ```kotlin
 val cmd = "-i $input -ss 00:00:05 -to 00:00:12 -c copy $output"
-FFmpegMedia.run(cmd)
+        FFmpegMedia.getInstance().run(
+            command = arrayOf(""),
+            durationTotal = 10, // total duration,
+            progressCallBack = progressCallBack
+        )
 ```
 
 ### Merge 2 Audio Files
 ```kotlin
-val cmd = "-i $input1 -i $input2 -filter_complex amix=inputs=2:duration=longest $output"
-FFmpegMedia.run(cmd)
+        val cmd = "-i $input1 -i $input2 -filter_complex amix=inputs=2:duration=longest $output"
+        val commandArray = cmd.split(" ").toTypedArray()
+        FFmpegMedia.getInstance().run(
+            command = commandArray,
+            durationTotal = 10, //  duration audio,
+            progressCallBack = progressCallBack
+        )
 ```
 
 ## API Overview
 ```kotlin
-FFmpegMedia.run(
-    command: String,
-    onSuccess: () -> Unit,
-    onFailure: (String) -> Unit
-)
+        FFmpegMedia.getInstance().run(
+            command = commandArray,
+            durationTotal = 10, //  duration audio,
+            progressCallBack = progressCallBack
+        )
 ```
 
 ## Notes
