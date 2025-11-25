@@ -9,8 +9,8 @@ import java.io.IOException
 import kotlin.math.max
 
 
-class VideoAction {
-    companion object : OnlySingletonHolder<VideoAction>(::VideoAction)
+class FFmpegMedia {
+    companion object : OnlySingletonHolder<FFmpegMedia>(::FFmpegMedia)
 
     private var libLoaded: Boolean = false
 
@@ -49,6 +49,15 @@ class VideoAction {
     ): Int {
         setConvertListener(durationTotal, outputPath, progressCallBack)
         return VideoLib.runMultiCommands(command)
+    }
+
+    fun run(
+        command: Array<String>,
+        outputPath: String,
+        durationTotal: Long,
+        progressCallBack: ProgressCallBack
+    ): Int {
+        return runCommand(command, outputPath, durationTotal, progressCallBack)
     }
 
     fun runVideoToMp3(
