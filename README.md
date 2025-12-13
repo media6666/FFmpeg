@@ -1,4 +1,4 @@
-# FFmpegMedia6666
+# FFmpegMedia6666 : This is an open-source library, free to use in all applications. No license or permission is required.
 
 **Android FFmpeg Library — Video/Audio Converter, Cutter, Merger, Mixer**
 
@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 ### Step 2 — Add the dependency
 ```gradle
-implementation 'com.github.media6666:FFmpegMedia6666:v1'
+implementation 'com.github.media6666:FFmpegMedia6666:1.10'
 ```
 
 ### Step 3 — Init
