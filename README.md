@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 
 ### Step 2 — Add the dependency
 ```gradle
-implementation 'com.github.media6666:FFmpegMedia6666:v1'
+implementation 'com.github.media6666:FFmpegMedia6666:1.10'
 ```
 
 ### Step 3 — Init
