@@ -1,4 +1,4 @@
-# FFmpegMedia6666
+# FFmpegMedia6666 : This is an open-source library, free to use in all applications. No license or permission is required.
 
 **Android FFmpeg Library — Video/Audio Converter, Cutter, Merger, Mixer**
 
