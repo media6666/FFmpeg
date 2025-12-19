@@ -2,7 +2,7 @@
 
 **Android FFmpeg Library — Video/Audio Converter, Cutter, Merger, Mixer**
 
-FFmpeg is a lightweight Android library that bundles FFmpeg binaries and allows you to run any FFmpeg command directly from your Android app.
+FFmpeg is a lightweight Android library and allows you to run any FFmpeg command directly from your Android app.
 
 ## Features
 - Video to MP3
