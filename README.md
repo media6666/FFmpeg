@@ -20,7 +20,7 @@ FFmpeg is an open-source Android library that allows you to run FFmpeg commands 
 
 ## Installation
 
-### Add JitPack
+### Step 1 — Add JitPack
 ```gradle
 dependencyResolutionManagement {
     repositories {
@@ -29,12 +29,12 @@ dependencyResolutionManagement {
 }
 ```
 
-### Add Dependency
+### Step 2 — Add Dependency
 ```gradle
 implementation("com.github.media6666:FFmpeg:1.14")
 ```
 
-### Init FFmpeg
+### Step 3 — Init FFmpeg
 ```kotlin
 FFmpegMedia.getInstance().initLib { loaded ->
     Log.e("LIB loaded", "$loaded")
@@ -43,11 +43,65 @@ FFmpegMedia.getInstance().initLib { loaded ->
 
 ---
 
+## Usage
+
+### Video → MP3
+```kotlin
+val cmd = "-i ${videoPath} -vn -ar 44100 -ac 2 -b:a 192k ${outputPath}"
+val commandArray = cmd.split(" ").toTypedArray()
+FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10,
+    progressCallBack = progressCallBack
+)
+```
+
+---
+
+### Audio Cutter
+```kotlin
+val cmd = "-i $input -ss 00:00:05 -to 00:00:12 -c copy $output"
+val commandArray = cmd.split(" ").toTypedArray()
+FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10,
+    progressCallBack = progressCallBack
+)
+```
+
+---
+
+### Merge 2 Audio Files
+```kotlin
+val cmd = "-i $input1 -i $input2 -filter_complex amix=inputs=2:duration=longest $output"
+val commandArray = cmd.split(" ").toTypedArray()
+FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10,
+    progressCallBack = progressCallBack
+)
+```
+
+---
+
+### Change Speed / Volume
+```kotlin
+val cmd = "-i $input -filter:a "atempo=1.25,volume=1.5" $output"
+val commandArray = cmd.split(" ").toTypedArray()
+FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10,
+    progressCallBack = progressCallBack
+)
+```
+
+---
+
 ## AI Sound / AI Voice Changer
 
-AI Sound allows users to change audio voices using AI effects.
+AI Sound allows users to transform audio voices using AI-powered effects.
 
-### Supported Voices
+### Supported Voice Effects
 - Girl
 - Baby
 - Woman
@@ -57,34 +111,63 @@ AI Sound allows users to change audio voices using AI effects.
 - Bee
 - Sheep
 
-### Init AI Engine
+---
+
+### Init AI Voice Engine
 ```kotlin
 AIVoiceChanger
     .getInstance()
     .initLibrary(context = this) { success ->
-        // success = true if initialized
+        if (success) {
+            // AI Sound initialized
+        }
     }
 ```
 
-### Play AI Effect
+---
+
+### Play AI Voice Effect
 ```kotlin
 AIVoiceChanger.getInstance()
     .playAvatarBgSound(effectItem.fullEffectPath())
 ```
 
-### Set Volume
+---
+
+### Set AI Voice Effect Volume
 ```kotlin
 AIVoiceChanger.getInstance()
     .setAvatarBgVolume(effectItem.volumeBgEffect)
 ```
 
-### Release
+---
+
+### Release AI Resources
 ```kotlin
 override fun onDestroy() {
     super.onDestroy()
     AIVoiceChanger.getInstance().close()
 }
 ```
+
+---
+
+## API Overview
+```kotlin
+FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10,
+    progressCallBack = progressCallBack
+)
+```
+
+---
+
+## Notes
+- FFmpeg binaries included — no extra setup required.
+- AI Sound works offline.
+- Supports Android 7.0+
+- Handle storage permissions for Android < 10 if needed.
 
 ---
 
