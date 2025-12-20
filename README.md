@@ -1,8 +1,10 @@
-# FFmpeg : This is an open-source library, free to use in all applications. No license or permission is required.
+# FFmpeg Android Library
 
 **Android FFmpeg Library — Video/Audio Converter, Cutter, Merger, Mixer**
 
-FFmpeg is a lightweight Android library and allows you to run any FFmpeg command directly from your Android app.
+FFmpeg is an open-source Android library that allows you to run FFmpeg commands directly inside your Android application.
+
+---
 
 ## Features
 - Video to MP3
@@ -12,79 +14,86 @@ FFmpeg is a lightweight Android library and allows you to run any FFmpeg command
 - Change speed / volume
 - Video Cutter / Compressor
 - Supports all FFmpeg custom commands
+- AI Sound / AI Voice Changer
+
+---
 
 ## Installation
 
-### Step 1 — Add JitPack
-In `settings.gradle`:
+### Add JitPack
 ```gradle
 dependencyResolutionManagement {
     repositories {
-        ...
         maven { url "https://jitpack.io" }
     }
 }
 ```
 
-### Step 2 — Add the dependency
+### Add Dependency
 ```gradle
-implementation("com.github.media6666:FFmpeg:1.12")
+implementation("com.github.media6666:FFmpeg:1.14")
 ```
 
-### Step 3 — Init
-```
+### Init FFmpeg
+```kotlin
 FFmpegMedia.getInstance().initLib { loaded ->
-            Log.e("LIB loaded", "$loaded")
-        }
+    Log.e("LIB loaded", "$loaded")
+}
 ```
 
-## Usage
+---
 
-### Video → MP3
+## AI Sound / AI Voice Changer
+
+AI Sound allows users to change audio voices using AI effects.
+
+### Supported Voices
+- Girl
+- Baby
+- Woman
+- Boy
+- Man
+- Chipmunk
+- Bee
+- Sheep
+
+### Init AI Engine
 ```kotlin
-        val cmd = "-i ${videoPath} -vn -ar 44100 -ac 2 -b:a 192k ${outputPath}"
-        val commandArray = cmd.split(" ").toTypedArray()
-        FFmpegMedia.getInstance().run(
-            command = commandArray,
-            durationTotal = 10, //  duration audio,
-            progressCallBack = progressCallBack
-        )
+AIVoiceChanger
+    .getInstance()
+    .initLibrary(context = this) { success ->
+        // success = true if initialized
+    }
 ```
 
-### Audio Cutter
+### Play AI Effect
 ```kotlin
-val cmd = "-i $input -ss 00:00:05 -to 00:00:12 -c copy $output"
-        FFmpegMedia.getInstance().run(
-            command = arrayOf(""),
-            durationTotal = 10, // total duration,
-            progressCallBack = progressCallBack
-        )
+AIVoiceChanger.getInstance()
+    .playAvatarBgSound(effectItem.fullEffectPath())
 ```
 
-### Merge 2 Audio Files
+### Set Volume
 ```kotlin
-        val cmd = "-i $input1 -i $input2 -filter_complex amix=inputs=2:duration=longest $output"
-        val commandArray = cmd.split(" ").toTypedArray()
-        FFmpegMedia.getInstance().run(
-            command = commandArray,
-            durationTotal = 10, //  duration audio,
-            progressCallBack = progressCallBack
-        )
+AIVoiceChanger.getInstance()
+    .setAvatarBgVolume(effectItem.volumeBgEffect)
 ```
 
-## API Overview
+### Release
 ```kotlin
-        FFmpegMedia.getInstance().run(
-            command = commandArray,
-            durationTotal = 10, //  duration audio,
-            progressCallBack = progressCallBack
-        )
+override fun onDestroy() {
+    super.onDestroy()
+    AIVoiceChanger.getInstance().close()
+}
 ```
 
-## Notes
-- FFmpeg binaries included — no extra setup required.
-- Supports Android 5.0+
-- Handle storage permissions for Android < 10 if needed.
+---
+
+## Reference Libraries
+- https://github.com/bilibili/ijkplayer
+- https://github.com/bilibili/FFmpeg
+- https://github.com/microshow/AiSound
+
+---
 
 ## License
 MIT License
