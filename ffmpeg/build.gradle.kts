@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-
+    implementation(files("libs/fmod.jar"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
