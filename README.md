@@ -31,7 +31,11 @@ dependencyResolutionManagement {
 
 ### Step 2 — Add Dependency
 ```gradle
-implementation("com.github.media6666:FFmpeg:1.14")
+// Version 1.12: Media only (audio/video features)
+implementation("com.github.media6666:FFmpeg:1.12")
+
+// Version 1.14: Media + AI Sound features
+// implementation("com.github.media6666:FFmpeg:1.14")
 ```
 
 ### Step 3 — Init FFmpeg
