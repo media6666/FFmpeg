@@ -35,7 +35,7 @@ dependencyResolutionManagement {
 implementation("com.github.media6666:FFmpeg:1.12")
 
 // Version 1.14: Media + AI Sound features
-// implementation("com.github.media6666:FFmpeg:1.14")
+implementation("com.github.media6666:FFmpeg:1.14")
 ```
 
 ### Step 3 — Init FFmpeg
