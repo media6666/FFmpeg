@@ -2,6 +2,7 @@ package com.inshot.videotomp3;
 
 import androidx.annotation.Keep;
 
+
 public class VideoLib {
 
     private static ConvertListener convertListener;
@@ -23,10 +24,10 @@ public class VideoLib {
     public static native int compressVideo(String inputPath, String outputPath, String aCodec, String videoCodec, String formatValueText, String lengthText, String command, boolean z, boolean z2, boolean z3);
 
     @Keep
-    public static native int cutAudio(String inputPath, String outputPath, String startTime, String length, String audioBitrate, String frequency, String formatExtensionValue, String command, String str9, String str10, String str11, String str12, String str13, String str14);
+    public static native int cutAudio(String inputPath, String outputPath, String startTime, String length, String audioBitrate, String frequency, String formatExtensionValue, String extensionOriginal, String command, boolean compareBitrate, String title, String artist, String album, String genre, String trackNo, String year);
 
     @Keep
-    public static native int cutMiddleAudio(String inputPath, String outputPath, String startTime, String length, String durationInSecond, String audioBitrate, String str7, String str8, String str9, String str10, String str11, String str12, String str13, String str14, String str15, String str16, String str17, String str18);
+    public static native int cutMiddleAudio(String inputPath, String outputPath, String startTime, String length, String durationInSecond, String audioBitrate, String str7, String str8, String extensionOriginal, String str9, String str10, String str11, String str12, String str13, String str14, String str15, String str16, String str17, String str18);
 
     @Keep
     public static native int cutVideo(String inputPath, String outputPath, String inputStartTime, String startTime, String lengthOrEndTime, String resolution, boolean videoSupportEncode, boolean audioSupportEncode, String compareRotateBitrateSize, String commandVolume, String str9);

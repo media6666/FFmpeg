@@ -678,12 +678,14 @@ class FFmpegMedia {
         return VideoLib.cutAudio(
             inputPath,
             outputPath,
-            startTime.toString(),
-            lengthCutter.toString(),
+            startTime.toString(), //startSec
+            lengthCutter.toString(), //durationSec
             audioBitrate,
             frequency.toString(),
             listAudioCutterFormatValue[positionSelectFormatExtension],
+            audioInfo.formatExtension,
             command,
+            isBitrateChanged(audioInfo),
             audioInfo.title,
             audioInfo.artist,
             audioInfo.album,
@@ -691,6 +693,21 @@ class FFmpegMedia {
             audioInfo.trackNo,
             audioInfo.year
         )
+    }
+
+    fun isBitrateChanged(audioInfo: AudioInfo): Boolean {
+        val original = compareBitrateAudio(audioInfo.bitrate, audioInfo.outBitrate).toIntOrNull()
+            ?.takeIf { it > 0 } ?: return false
+        val selected = "128k".removeSuffix("k").toIntOrNull() ?: return false
+        return original / 1000 != selected
+    }
+
+    fun compareBitrateAudio(bitrate: String, outBitrate: String): String {
+        var value = bitrate
+        if ((value.toIntOrNull() ?: 0) <= 1000 && outBitrate.isNotBlank()) {
+            value = outBitrate
+        }
+        return value.ifEmpty { "" }
     }
 
     fun audioCutterMiddle(
@@ -792,6 +809,7 @@ class FFmpegMedia {
             audioBitrate,
             frequency.toString(),
             listAudioCutterFormatValue[positionSelectFormatExtension],
+            audioInfo.formatExtension,
             volumeText,
             speedText,
             commandFadeIn,
