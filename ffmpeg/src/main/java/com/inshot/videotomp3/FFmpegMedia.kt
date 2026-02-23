@@ -658,6 +658,11 @@ class FFmpegMedia {
         } else {
             listBitrateValueVideoToMp3[2]
         }
+        val bitrateChanged = if (positionBitrate == -1) {
+            false
+        } else {
+            isBitrateChanged(audioBitrate, audioInfo)
+        }
         val command = sb.toString()
         val listOf = listOf(
             inputPath,
@@ -685,7 +690,7 @@ class FFmpegMedia {
             listAudioCutterFormatValue[positionSelectFormatExtension],
             audioInfo.formatExtension,
             command,
-            isBitrateChanged(audioInfo),
+            bitrateChanged,
             audioInfo.title,
             audioInfo.artist,
             audioInfo.album,
@@ -695,14 +700,14 @@ class FFmpegMedia {
         )
     }
 
-    fun isBitrateChanged(audioInfo: AudioInfo): Boolean {
+    private fun isBitrateChanged(audioBitrate: String, audioInfo: AudioInfo): Boolean {
         val original = compareBitrateAudio(audioInfo.bitrate, audioInfo.outBitrate).toIntOrNull()
             ?.takeIf { it > 0 } ?: return false
-        val selected = "128k".removeSuffix("k").toIntOrNull() ?: return false
+        val selected = audioBitrate.removeSuffix("k").toIntOrNull() ?: return false
         return original / 1000 != selected
     }
 
-    fun compareBitrateAudio(bitrate: String, outBitrate: String): String {
+    private fun compareBitrateAudio(bitrate: String, outBitrate: String): String {
         var value = bitrate
         if ((value.toIntOrNull() ?: 0) <= 1000 && outBitrate.isNotBlank()) {
             value = outBitrate
