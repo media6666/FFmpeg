@@ -103,67 +103,13 @@ FFmpegMedia.getInstance().run(
 
 ## AI Sound / AI Voice Changer
 
-AI Sound allows users to transform audio voices using AI-powered effects.
+# 🚨 NOTE
 
-### Supported Voice Effects
-- Girl
-- Baby
-- Woman
-- Boy
-- Man
-- Chipmunk
-- Bee
-- Sheep
-
----
-
-### Init AI Voice Engine
-```kotlin
-AIVoiceChanger
-    .getInstance()
-    .initLibrary(context = this) { success ->
-        if (success) {
-            // AI Sound initialized
-        }
-    }
-```
-
----
-
-### Play AI Voice Effect
-```kotlin
-AIVoiceChanger.getInstance()
-    .playAvatarBgSound(effectItem.fullEffectPath())
-```
-
----
-
-### Set AI Voice Effect Volume
-```kotlin
-AIVoiceChanger.getInstance()
-    .setAvatarBgVolume(effectItem.volumeBgEffect)
-```
-
----
-
-### Release AI Resources
-```kotlin
-override fun onDestroy() {
-    super.onDestroy()
-    AIVoiceChanger.getInstance().close()
-}
-```
-
----
-
-## API Overview
-```kotlin
-FFmpegMedia.getInstance().run(
-    command = commandArray,
-    durationTotal = 10,
-    progressCallBack = progressCallBack
-)
-```
+> **The AI Sound feature has been removed from this project.**
+>
+> AI Sound will be developed and maintained in a separate standalone project.
+>
+> This change does not affect other existing features in this repository.
 
 ---
 
@@ -178,7 +124,6 @@ FFmpegMedia.getInstance().run(
 ## Reference Libraries
 - https://github.com/bilibili/ijkplayer
 - https://github.com/bilibili/FFmpeg
-- https://github.com/microshow/AiSound
 
 ---
 
