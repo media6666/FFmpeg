@@ -49,6 +49,18 @@ FFmpegMedia.getInstance().initLib { loaded ->
 
 ## Usage
 
+```
+1. FFmpegMedia.getInstance().setCancelFlag(0) // ← Reset once before running FFmpeg
+
+2. FFmpegMedia.getInstance().run(
+    command = commandArray,
+    durationTotal = 10000L,
+    progressCallBack = progressCallBack
+)
+
+3. FFmpegMedia.getInstance().setCancelFlag() // when destroy Activity or Done task
+```
+
 ### Video → MP3
 ```kotlin
 val cmd = "-i ${videoPath} -vn -ar 44100 -ac 2 -b:a 192k ${outputPath}"
